@@ -1,0 +1,31 @@
+@model App.Core.Requests.ListShoppingListResponse
+
+<h3>My Shopping Lists</h3>
+
+<a href="@Url.Action("Create", "ShoppingList")" class="btn btn-default">
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+    New Shopping List   
+</a>
+
+<table  class="table">
+    <thead>
+        <th scope="col">List Name</th>
+        <th scope="col">Created At</th>
+    </thead>
+    <tbody>
+        @foreach (var record in Model.Records)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(record.Name, "Edit", new { Id = record.Id })                   
+                </td>
+                <td>@record.CreatedAt</td>
+                <td>
+                    <a href="@Url.Action("Archive", new { Id = record.Id })" class="btn btn-default">
+                       Archive
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

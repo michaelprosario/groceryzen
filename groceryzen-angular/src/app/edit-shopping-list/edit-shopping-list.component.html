@@ -1,0 +1,46 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">Edit Shopping List</div>
+    <div class="panel-body">
+
+        <button 
+              className="btn btn-primary"
+              routerLink="/add-shopping-list-item/{{shoppingListId}}"
+              class="btn btn-primary"> Add </button>
+
+        <br>
+        <table class="table table-striped">
+        <tr>
+          <td>Name</td>
+          <td style="text-align:right;">Qty</td>
+          <td style="text-align:right;">Unit Price</td>
+          <td style="text-align:right;">Price</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr *ngFor="let record of records">
+          <td>
+            <a routerLink="/edit-shopping-list-item/{{record.id}}">
+            {{ record.productName }}
+            </a><br>
+            {{ record.productCategory }}
+          </td>
+          <td style="text-align:right;">{{ record.qty }}</td>
+          <td style="text-align:right;">${{ record.unitPrice }}</td>
+          <td style="text-align:right;">${{ record.price }}</td>
+          <td>
+              <button 
+              className="btn btn-primary"
+              (click)="handleDelete(record)"
+              class="btn btn-danger"              
+              > Delete </button>
+          </td>
+        </tr>
+        <br>
+        Grand Total: ${{ total | number:'1.2-2' }}
+        </table>
+        
+    </div>
+  </div>
+
+
+

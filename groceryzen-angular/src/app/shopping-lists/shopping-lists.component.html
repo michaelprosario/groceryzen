@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Shopping List</div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <tr *ngFor="let record of records">
+        <td>
+          <a routerLink="/edit-shopping-list/{{record.id}}">
+            {{record.name}}
+          </a>
+        </td>
+        <td>
+          <input type="button" value="Archive"  class="btn btn-danger">
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

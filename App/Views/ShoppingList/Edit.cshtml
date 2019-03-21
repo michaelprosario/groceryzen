@@ -1,0 +1,49 @@
+﻿@model App.Core.Entities.ShoppingList
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<script src="~/js/ShoppingList/Edit.js"></script>
+
+<h2>Edit Shopping List</h2>
+@Html.HiddenFor(m => m.Id)
+
+<input type="button" value="Add item" onclick="addShoppingListItem();">
+<div id="divAddShoppingListItem" style="display:none;">
+    <div class="col-sm-5">
+                <h4>Add shopping list:</h4>
+                <h5>Search for product</h5>
+                <div class="panel panel-default">
+                    <div class="panel-body form-horizontal payment-form">
+                        <div class="form-group">
+                            <label for="query" class="col-sm-3 control-label">Product search</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="query" name="query">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 text-right">
+                                <button type="button" class="btn btn-default preview-add-button" onclick="handleSearchClick()">
+                                    <span class="glyphicon glyphicon-search"></span> Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+    </div>
+</div>
+
+<div id="divProductSearchGrid"></div>
+<div id="divShoppingListItemsGrid"></div>
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
