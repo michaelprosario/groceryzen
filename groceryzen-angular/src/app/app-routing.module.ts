@@ -5,11 +5,13 @@ import { EditShoppingListComponent } from '../app/edit-shopping-list/edit-shoppi
 import { ShoppingListsComponent } from './shopping-lists/shopping-lists.component';
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: 'edit-shopping-list/:id', component: EditShoppingListComponent },
   { path: 'add-shopping-list-item/:id', component: ItemSearchComponent },
-  { path: 'login', component: LoginComponent },  
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },  
   { path: '', component: ShoppingListsComponent },
 ];
 
