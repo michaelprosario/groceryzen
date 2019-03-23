@@ -71,23 +71,23 @@ export class ShoppingListsService {
   constructor( private http: HttpClient ) {}
 
   getShoppingListsUrl(): string {
-    return environment.apiUrl + '/ListShoppingLists';
+    return environment.apiUrl + '/GroceryZen/ListShoppingLists';
   }
 
   deleteShoppingListItemUrl(): string {
-    return environment.apiUrl + '/DeleteShoppingListItem';
+    return environment.apiUrl + '/GroceryZen/DeleteShoppingListItem';
   }  
 
   getShoppingListsItemsUrl(): string {
-    return environment.apiUrl + '/ListShoppingListItems';
+    return environment.apiUrl + '/GroceryZen/ListShoppingListItems';
   }
 
   getWalmartProductSearchUrl(): string {
-    return environment.apiUrl + '/ListProductsForSearch';
+    return environment.apiUrl + '/GroceryZen/ListProductsForSearch';
   } 
   
   getCreateShoppingListItemUrl(): string {
-    return environment.apiUrl + '/CreateShoppingListItem';
+    return environment.apiUrl + '/GroceryZen/CreateShoppingListItem';
   }    
 
   getShoppingLists (request: BasicRequest): Observable<ListShoppingListsResponse> {

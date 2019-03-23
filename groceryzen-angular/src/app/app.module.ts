@@ -11,13 +11,17 @@ import { AuthGuard } from './guards/auth.guard';
 import { ShoppingListsService } from './shopping-lists.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShoppingListsComponent,
     EditShoppingListComponent,
-    ItemSearchComponent
+    ItemSearchComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
