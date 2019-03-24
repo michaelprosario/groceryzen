@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   userName: string = "";
   password: string = "";
   returnUrl: string = "";
+  message: string = "";
 
   constructor(
     private router: Router,
@@ -30,11 +31,11 @@ export class LoginComponent implements OnInit {
     .pipe(first())
     .subscribe(response => 
     { 
-      console.log(response);
-      this.router.navigate(["/"]);
+      this.message = "";
+      this.router.navigate(["/shopping-list"]);
     }, 
     error => {
-      alert('Bad password');
+      this.message = "Enter valid user name and password";
     });
   }
 

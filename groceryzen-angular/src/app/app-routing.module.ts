@@ -10,9 +10,9 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   { path: 'edit-shopping-list/:id', component: EditShoppingListComponent },
   { path: 'add-shopping-list-item/:id', component: ItemSearchComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
   { path: 'register', component: RegisterComponent },  
-  { path: '', component: ShoppingListsComponent },
+  { path: 'shopping-list', component: ShoppingListsComponent },
 ];
 
 @NgModule({
