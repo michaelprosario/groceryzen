@@ -1,39 +1,28 @@
-<div class="panel panel-default">
-  <div class="panel-heading">Item search</div>
-  <div class="panel-body">
-    <div>
-      Search for product:<br>
-      <input [(ngModel)]="productSearchTerm" 
-             name="txtProductSearchTerm" 
-             id="txtProductSearchTerm" 
-             #txtProductSearchTerm
-             (keyup.enter)="handleProductSearch($event)" 
-             />
-      <input type="button" value="Search" (click)="handleProductSearch()" class="btn btn-primary" />
-    </div>
-    <div>
-      <table class="table table-striped table-hover" *ngIf="showProductItems">
-        <thead>
-          <tr>
-            <th scope="col">Product</th>
-            <th scope="col">Unit Price</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let record of productItems">
-            <td>
-              {{record.name}}<br>
-              {{record.categoryPath}}
-            </td>
-            <td style="text-align:right;">${{record.salePrice}}</td>
-            <td>
-              <button  (click)="handleProductItemSelected(record)" class="btn btn-primary"> Select </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<mat-toolbar>
+    <span>Item Search</span>
+</mat-toolbar>
+  
+<mat-card>
+  <mat-form-field>
+    <input [(ngModel)]="productSearchTerm" 
+      name="txtProductSearchTerm" 
+      id="txtProductSearchTerm" 
+      #txtProductSearchTerm
+      (keyup.enter)="handleProductSearch($event)" 
+      matInput placeholder="Search for product"
+    />
+  </mat-form-field>
+  <button  (click)="handleProductSearch()" mat-raised-button color="primary">Search</button>
 
-  </div>
-</div>
+  <mat-list>
+    <mat-list-item *ngFor="let record of productItems">
+        <h1 matLine>{{record.name}}</h1>
+        <p matLine>{{record.categoryPath}}</p>
+        <p matLine>${{record.salePrice}}</p>
+        <button  (click)="handleProductItemSelected(record)" mat-raised-button color="primary"> Select </button>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
+
+
