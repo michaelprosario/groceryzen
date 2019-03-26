@@ -160,6 +160,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_list__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/material/list */ "./node_modules/@angular/material/esm5/list.es5.js");
 /* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/material/toolbar */ "./node_modules/@angular/material/esm5/toolbar.es5.js");
 /* harmony import */ var _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/material/sidenav */ "./node_modules/@angular/material/esm5/sidenav.es5.js");
+/* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/material/divider */ "./node_modules/@angular/material/esm5/divider.es5.js");
+
 
 
 
@@ -198,6 +200,7 @@ var AppModule = /** @class */ (function () {
                 _register_register_component__WEBPACK_IMPORTED_MODULE_15__["RegisterComponent"]
             ],
             imports: [
+                _angular_material_divider__WEBPACK_IMPORTED_MODULE_24__["MatDividerModule"],
                 _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_23__["MatSidenavModule"],
                 _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_22__["MatToolbarModule"],
                 _angular_material_list__WEBPACK_IMPORTED_MODULE_21__["MatListModule"],
@@ -245,7 +248,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">Edit Shopping List</div>\r\n    <div class=\"panel-body\">\r\n\r\n        <button \r\n              className=\"btn btn-primary\"\r\n              routerLink=\"/add-shopping-list-item/{{shoppingListId}}\"\r\n              class=\"btn btn-primary\"> Add </button>\r\n\r\n        <br>\r\n        <table class=\"table table-striped\">\r\n        <tr>\r\n          <td>Name</td>\r\n          <td style=\"text-align:right;\">Qty</td>\r\n          <td style=\"text-align:right;\">Unit Price</td>\r\n          <td style=\"text-align:right;\">Price</td>\r\n          <td>&nbsp;</td>\r\n        </tr>\r\n        <tr *ngFor=\"let record of records\">\r\n          <td>\r\n            <a routerLink=\"/edit-shopping-list-item/{{record.id}}\">\r\n            {{ record.productName }}\r\n            </a><br>\r\n            {{ record.productCategory }}\r\n          </td>\r\n          <td style=\"text-align:right;\">{{ record.qty }}</td>\r\n          <td style=\"text-align:right;\">${{ record.unitPrice }}</td>\r\n          <td style=\"text-align:right;\">${{ record.price }}</td>\r\n          <td>\r\n              <button \r\n              className=\"btn btn-primary\"\r\n              (click)=\"handleDelete(record)\"\r\n              class=\"btn btn-danger\"              \r\n              > Delete </button>\r\n          </td>\r\n        </tr>\r\n        <br>\r\n        Grand Total: ${{ total | number:'1.2-2' }}\r\n        </table>\r\n        \r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n"
+module.exports = "<mat-toolbar>\r\n  <span>Edit Shopping List</span>\r\n</mat-toolbar>\r\n\r\n<mat-card>\r\n  <button routerLink=\"/add-shopping-list-item/{{shoppingListId}}\" class=\"btn btn-primary\"\r\n    mat-raised-button color=\"primary\"> Add </button>\r\n\r\n  <mat-list>\r\n    <mat-list-item *ngFor=\"let record of records\">\r\n      <h1 matLine>{{ record.productName }}</h1>\r\n      <p matLine>{{ record.productCategory }}</p>\r\n      <p matLine>${{ record.price }}</p>\r\n      <p>\r\n        <button (click)=\"handleDelete(record)\" mat-raised-button color=\"primary\"> Delete </button>\r\n      </p>\r\n      <mat-divider></mat-divider>\r\n    </mat-list-item>\r\n  </mat-list>\r\n  <br>\r\n  <div>Grand Total: ${{ total | number:'1.2-2' }}</div>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -493,7 +496,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default\">\r\n  <div class=\"panel-heading\">Item search</div>\r\n  <div class=\"panel-body\">\r\n    <div>\r\n      Search for product:<br>\r\n      <input [(ngModel)]=\"productSearchTerm\" \r\n             name=\"txtProductSearchTerm\" \r\n             id=\"txtProductSearchTerm\" \r\n             #txtProductSearchTerm\r\n             (keyup.enter)=\"handleProductSearch($event)\" \r\n             />\r\n      <input type=\"button\" value=\"Search\" (click)=\"handleProductSearch()\" class=\"btn btn-primary\" />\r\n    </div>\r\n    <div>\r\n      <table class=\"table table-striped table-hover\" *ngIf=\"showProductItems\">\r\n        <thead>\r\n          <tr>\r\n            <th scope=\"col\">Product</th>\r\n            <th scope=\"col\">Unit Price</th>\r\n            <th>&nbsp;</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let record of productItems\">\r\n            <td>\r\n              {{record.name}}<br>\r\n              {{record.categoryPath}}\r\n            </td>\r\n            <td style=\"text-align:right;\">${{record.salePrice}}</td>\r\n            <td>\r\n              <button  (click)=\"handleProductItemSelected(record)\" class=\"btn btn-primary\"> Select </button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n\r\n  </div>\r\n</div>"
+module.exports = "<mat-toolbar>\r\n    <span>Item Search</span>\r\n</mat-toolbar>\r\n  \r\n<mat-card>\r\n  <mat-form-field>\r\n    <input [(ngModel)]=\"productSearchTerm\" \r\n      name=\"txtProductSearchTerm\" \r\n      id=\"txtProductSearchTerm\" \r\n      #txtProductSearchTerm\r\n      (keyup.enter)=\"handleProductSearch()\" \r\n      matInput placeholder=\"Search for product\"\r\n    />\r\n  </mat-form-field>\r\n  <button  (click)=\"handleProductSearch()\" mat-raised-button color=\"primary\">Search</button>\r\n\r\n  <mat-list>\r\n    <mat-list-item *ngFor=\"let record of productItems\">\r\n        <h1 matLine>{{record.name}}</h1>\r\n        <p matLine>{{record.categoryPath}}</p>\r\n        <p matLine>${{record.salePrice}}</p>\r\n        <button  (click)=\"handleProductItemSelected(record)\" mat-raised-button color=\"primary\"> Select </button>\r\n      <mat-divider></mat-divider>\r\n    </mat-list-item>\r\n  </mat-list>\r\n</mat-card>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1067,7 +1070,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    apiUrl: 'http://localhost:8080'
+    apiUrl: ''
 };
 /*
  * For easier debugging in development mode, you can import the following file
