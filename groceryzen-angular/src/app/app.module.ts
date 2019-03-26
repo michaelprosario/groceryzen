@@ -21,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     RegisterComponent
   ],
   imports: [
+    MatDividerModule,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
