@@ -75,6 +75,11 @@ export class CreateShoppingListResponse extends Response
   Id: string;
 }
 
+export class ArchiveShoppingListRequest extends BasicRequest
+{
+    Id: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -82,7 +87,7 @@ export class ShoppingListsService {
 
   constructor( private http: HttpClient ) {}
 
-  getShoppingListsUrl(): string {
+  ShoppingListsUrl(): string {
     return environment.apiUrl + '/GroceryZen/ListShoppingLists';
   }
 
@@ -90,24 +95,28 @@ export class ShoppingListsService {
     return environment.apiUrl + '/GroceryZen/DeleteShoppingListItem';
   }  
 
-  getShoppingListsItemsUrl(): string {
+  ShoppingListsItemsUrl(): string {
     return environment.apiUrl + '/GroceryZen/ListShoppingListItems';
   }
 
-  getWalmartProductSearchUrl(): string {
+  WalmartProductSearchUrl(): string {
     return environment.apiUrl + '/GroceryZen/ListProductsForSearch';
   } 
   
-  getCreateShoppingListItemUrl(): string {
+  CreateShoppingListItemUrl(): string {
     return environment.apiUrl + '/GroceryZen/CreateShoppingListItem';
   }    
 
-  getCreateShoppingListUrl(): string {
+  CreateShoppingListUrl(): string {
     return environment.apiUrl + '/GroceryZen/CreateShoppingList';
   }    
 
-  getShoppingLists (request: BasicRequest): Observable<ListShoppingListsResponse> {
-    return this.http.post<ListShoppingListsResponse>(this.getShoppingListsUrl(), request, httpOptions)
+  ArchiveShoppingListUrl(): string {
+    return environment.apiUrl + '/GroceryZen/ArchiveShoppingList';
+  }    
+
+  GetShoppingLists (request: BasicRequest): Observable<ListShoppingListsResponse> {
+    return this.http.post<ListShoppingListsResponse>(this.ShoppingListsUrl(), request, httpOptions)
       .pipe(
         tap(_ => this.log('fetched shopping lists')),
         catchError(this.handleError('getShoppingLists', null))
@@ -115,7 +124,7 @@ export class ShoppingListsService {
   }
 
   getShoppingListItems (request: ListShoppingListItemsRequest): Observable<ListShoppingListItemsResponse> {
-    return this.http.post<ListShoppingListItemsResponse>(this.getShoppingListsItemsUrl(), request, httpOptions)
+    return this.http.post<ListShoppingListItemsResponse>(this.ShoppingListsItemsUrl(), request, httpOptions)
       .pipe(
         tap(_ => this.log('fetched shopping list items')),
         catchError(this.handleError('getShoppingListItems', null))
@@ -130,8 +139,16 @@ export class ShoppingListsService {
       );
   }  
 
+  archiveShoppingList (request: ArchiveShoppingListRequest): Observable<BaseResponse> {
+    return this.http.post<BaseResponse>(this.ArchiveShoppingListUrl(), request, httpOptions)
+      .pipe(
+        tap(_ => this.log('archive shopping list')),
+        catchError(this.handleError('archiveShoppingListItem', null))
+      );
+  }  
+
   walmartProductSearch (request: WalmartProductSearchRequest): Observable<WalmartProductSearchResponse> {
-    return this.http.post<WalmartProductSearchResponse>(this.getWalmartProductSearchUrl(), request, httpOptions)
+    return this.http.post<WalmartProductSearchResponse>(this.WalmartProductSearchUrl(), request, httpOptions)
       .pipe(
         tap(_ => this.log('fetched shopping list items')),
         catchError(this.handleError('walmartProductSearch', null))
@@ -139,7 +156,7 @@ export class ShoppingListsService {
   }  
 
   createShoppingListItem (request: CreateShoppingListItemRequest): Observable<CreateShoppingListItemResponse> {
-    return this.http.post<CreateShoppingListItemResponse>(this.getCreateShoppingListItemUrl(), request, httpOptions)
+    return this.http.post<CreateShoppingListItemResponse>(this.CreateShoppingListItemUrl(), request, httpOptions)
       .pipe(
         tap(_ => this.log('createShoppingListItem done')),
         catchError(this.handleError('createShoppingListItem', null))
@@ -147,7 +164,7 @@ export class ShoppingListsService {
   }  
 
   createShoppingList (request: CreateShoppingListRequest): Observable<CreateShoppingListResponse> {
-    return this.http.post<CreateShoppingListResponse>(this.getCreateShoppingListUrl(), request, httpOptions)
+    return this.http.post<CreateShoppingListResponse>(this.CreateShoppingListUrl(), request, httpOptions)
       .pipe(
         tap(_ => this.log('createShoppingList done')),
         catchError(this.handleError('createShoppingList', null))

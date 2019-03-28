@@ -14,7 +14,7 @@
         {{record.name}}
       </a>
       &nbsp;
-      <button type="button" class="btn btn-danger align-right" mat-raised-button color="primary">
+      <button type="button" class="btn btn-danger align-right" mat-raised-button color="primary" (click)="handleArchive(record.id)">
         Archive
       </button>
 
