@@ -1,23 +1,23 @@
 <mat-toolbar>
-    <span>Shopping Lists</span>
+  <span>Shopping Lists</span>
 </mat-toolbar>
 
-<mat-card>    
-    <mat-list>
-      <mat-list-item *ngFor="let record of records">
-        <a routerLink="/edit-shopping-list/{{record.id}}">
-          {{record.name}}
-        </a>
-        &nbsp;
-        <button 
-          type="button" 
-          class="btn btn-danger align-right" 
-          mat-raised-button color="primary" 
-          >
-          Archive
-        </button>
-  
-      </mat-list-item>
-    </mat-list>
-</mat-card>      
 
+<button type="button" class="btn btn-danger" mat-raised-button color="primary" (click)="handleCreateList()">
+  Create List
+</button>
+
+<mat-card>
+  <mat-list>
+    <mat-list-item *ngFor="let record of records">
+      <a routerLink="/edit-shopping-list/{{record.id}}">
+        {{record.name}}
+      </a>
+      &nbsp;
+      <button type="button" class="btn btn-danger align-right" mat-raised-button color="primary">
+        Archive
+      </button>
+
+    </mat-list-item>
+  </mat-list>
+</mat-card>

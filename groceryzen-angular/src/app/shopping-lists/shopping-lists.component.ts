@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingList } from '../entities/shopping-list';
-import { ShoppingListsService } from '../shopping-lists.service';
+import { ShoppingListsService, CreateShoppingListItemRequest, CreateShoppingListRequest } from '../shopping-lists.service';
 import { ListShoppingListsResponse, BasicRequest } from '../shopping-lists.service';
 import { first } from 'rxjs/operators';
+import { getListeners } from '@angular/core/src/render3/discovery_utils';
 
 @Component({
   selector: 'app-shopping-lists',
@@ -26,9 +27,19 @@ export class ShoppingListsComponent implements OnInit {
     });
   }
 
+  handleCreateList(){
+    var request = new CreateShoppingListRequest();
+    request.Name = "List - " + new Date().toLocaleDateString();
+
+    this.shoppingListService.createShoppingList(request)
+    .pipe(first())
+    .subscribe(response => { 
+      this.getList();
+    });    
+  }
+
   ngOnInit() {
-    this.getList();
-    
+    this.getList(); 
   }
 
 }

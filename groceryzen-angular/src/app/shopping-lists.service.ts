@@ -63,6 +63,18 @@ export class CreateShoppingListItemResponse extends Response
   Id: string;
 }
 
+
+export class CreateShoppingListRequest extends BasicRequest
+{
+  Name: string;
+  UserId: string;
+}
+
+export class CreateShoppingListResponse extends Response
+{
+  Id: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -88,6 +100,10 @@ export class ShoppingListsService {
   
   getCreateShoppingListItemUrl(): string {
     return environment.apiUrl + '/GroceryZen/CreateShoppingListItem';
+  }    
+
+  getCreateShoppingListUrl(): string {
+    return environment.apiUrl + '/GroceryZen/CreateShoppingList';
   }    
 
   getShoppingLists (request: BasicRequest): Observable<ListShoppingListsResponse> {
@@ -127,6 +143,14 @@ export class ShoppingListsService {
       .pipe(
         tap(_ => this.log('createShoppingListItem done')),
         catchError(this.handleError('createShoppingListItem', null))
+      );
+  }  
+
+  createShoppingList (request: CreateShoppingListRequest): Observable<CreateShoppingListResponse> {
+    return this.http.post<CreateShoppingListResponse>(this.getCreateShoppingListUrl(), request, httpOptions)
+      .pipe(
+        tap(_ => this.log('createShoppingList done')),
+        catchError(this.handleError('createShoppingList', null))
       );
   }  
 
