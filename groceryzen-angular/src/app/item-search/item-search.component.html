@@ -3,6 +3,8 @@
 </mat-toolbar>
   
 <mat-card>
+
+
   <mat-form-field>
     <input [(ngModel)]="productSearchTerm" 
       name="txtProductSearchTerm" 
@@ -12,7 +14,9 @@
       matInput placeholder="Search for product"
     />
   </mat-form-field>
-  <button  (click)="handleProductSearch()" mat-raised-button color="primary">Search</button>
+  <button  (click)="handleProductSearch()" mat-raised-button color="primary">Search</button> &nbsp;
+
+
 
   <mat-list>
     <mat-list-item *ngFor="let record of productItems">
@@ -26,3 +30,4 @@
 </mat-card>
 
 
+<button routerLink="/edit-shopping-list/{{shoppingListId}}" class="btn btn-primary" mat-raised-button color="primary"> Back To Shopping List </button>

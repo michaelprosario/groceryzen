@@ -3,8 +3,9 @@
 </mat-toolbar>
 
 <mat-card>
-  <button routerLink="/add-shopping-list-item/{{shoppingListId}}" class="btn btn-primary"
-    mat-raised-button color="primary"> Add </button>
+
+<button routerLink="/add-shopping-list-item/{{shoppingListId}}" class="btn btn-primary" mat-raised-button color="primary"> Add </button>&nbsp;
+<button routerLink="/shopping-list" class="btn btn-primary" mat-raised-button color="primary"> Close </button>
 
   <mat-list>
     <mat-list-item *ngFor="let record of records">

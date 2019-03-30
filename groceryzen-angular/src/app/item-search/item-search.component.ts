@@ -20,7 +20,7 @@ export class ItemSearchComponent implements OnInit {
     private shoppingListsService: ShoppingListsService,
     private router: Router
   ) { 
-    
+    this.shoppingListId = this.route.snapshot.paramMap.get('id');    
   }
 
   ngOnInit() {
@@ -41,7 +41,6 @@ export class ItemSearchComponent implements OnInit {
   }  
 
   handleProductItemSelected(record: WalmartProductSearchItem){
-    this.shoppingListId = this.route.snapshot.paramMap.get('id');
 
     let request = new CreateShoppingListItemRequest();
     request.Completed = false;
