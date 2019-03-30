@@ -22,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatDividerModule } from '@angular/material/divider';
     RegisterComponent
   ],
   imports: [
+    MatCheckboxModule,
     MatDividerModule,
     MatSidenavModule,
     MatToolbarModule,

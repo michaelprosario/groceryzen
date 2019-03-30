@@ -3,13 +3,12 @@
 </mat-toolbar>
 
 <mat-card>
-
-<button routerLink="/add-shopping-list-item/{{shoppingListId}}" class="btn btn-primary" mat-raised-button color="primary"> Add </button>&nbsp;
-<button routerLink="/shopping-list" class="btn btn-primary" mat-raised-button color="primary"> Close </button>
+  <button routerLink="/add-shopping-list-item/{{shoppingListId}}" class="btn btn-primary"
+    mat-raised-button color="primary"> Add </button>
 
   <mat-list>
     <mat-list-item *ngFor="let record of records">
-      <h1 matLine>{{ record.productName }}</h1>
+      <h1 matLine><mat-checkbox [(ngModel)]= "record.completed" (change)="onItemCompleted(record)">{{ record.productName }}</mat-checkbox></h1>
       <p matLine>{{ record.productCategory }}</p>
       <p matLine>${{ record.price }}</p>
       <p>

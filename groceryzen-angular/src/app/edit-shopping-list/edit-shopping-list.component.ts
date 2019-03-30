@@ -3,6 +3,7 @@ import { ShoppingListsService, ListShoppingListItemsRequest, DeleteShoppingListI
 import { ActivatedRoute } from '@angular/router';
 import { ShoppingListItem } from '../entities/shopping-list-item';
 import { first } from 'rxjs/operators';
+import { ShoppingList } from '../entities/shopping-list';
 
 @Component({
   selector: 'app-edit-shopping-list',
@@ -61,4 +62,9 @@ export class EditShoppingListComponent implements OnInit {
         this.calculateTotal();
     });
   }  
+
+  onItemCompleted(record: ShoppingListItem): void {
+    console.log(record.completed);
+    console.log(record.id); 
+  }
 }
