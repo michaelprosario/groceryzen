@@ -161,6 +161,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/material/toolbar */ "./node_modules/@angular/material/esm5/toolbar.es5.js");
 /* harmony import */ var _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/material/sidenav */ "./node_modules/@angular/material/esm5/sidenav.es5.js");
 /* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/material/divider */ "./node_modules/@angular/material/esm5/divider.es5.js");
+/* harmony import */ var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @angular/material/checkbox */ "./node_modules/@angular/material/esm5/checkbox.es5.js");
+
 
 
 
@@ -200,6 +202,7 @@ var AppModule = /** @class */ (function () {
                 _register_register_component__WEBPACK_IMPORTED_MODULE_15__["RegisterComponent"]
             ],
             imports: [
+                _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_25__["MatCheckboxModule"],
                 _angular_material_divider__WEBPACK_IMPORTED_MODULE_24__["MatDividerModule"],
                 _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_23__["MatSidenavModule"],
                 _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_22__["MatToolbarModule"],
@@ -248,7 +251,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\r\n  <span>Edit Shopping List</span>\r\n</mat-toolbar>\r\n\r\n<mat-card>\r\n  <button routerLink=\"/add-shopping-list-item/{{shoppingListId}}\" class=\"btn btn-primary\"\r\n    mat-raised-button color=\"primary\"> Add </button>\r\n\r\n  <mat-list>\r\n    <mat-list-item *ngFor=\"let record of records\">\r\n      <h1 matLine>{{ record.productName }}</h1>\r\n      <p matLine>{{ record.productCategory }}</p>\r\n      <p matLine>${{ record.price }}</p>\r\n      <p>\r\n        <button (click)=\"handleDelete(record)\" mat-raised-button color=\"primary\"> Delete </button>\r\n      </p>\r\n      <mat-divider></mat-divider>\r\n    </mat-list-item>\r\n  </mat-list>\r\n  <br>\r\n  <div>Grand Total: ${{ total | number:'1.2-2' }}</div>\r\n</mat-card>\r\n"
+module.exports = "<mat-toolbar>\r\n  <span>Edit Shopping List</span>\r\n</mat-toolbar>\r\n\r\n<mat-card>\r\n  <button routerLink=\"/add-shopping-list-item/{{shoppingListId}}\" class=\"btn btn-primary\"\r\n    mat-raised-button color=\"primary\"> Add </button>\r\n\r\n  <mat-list>\r\n    <mat-list-item *ngFor=\"let record of records\">\r\n      <h1 matLine><mat-checkbox [(ngModel)]= \"record.completed\" (change)=\"onItemCompleted(record)\">{{ record.productName }}</mat-checkbox></h1>\r\n      <p matLine>{{ record.productCategory }}</p>\r\n      <p matLine>${{ record.price }}</p>\r\n      <p>\r\n        <button (click)=\"handleDelete(record)\" mat-raised-button color=\"primary\"> Delete </button>\r\n      </p>\r\n      <mat-divider></mat-divider>\r\n    </mat-list-item>\r\n  </mat-list>\r\n  <br>\r\n  <div>Grand Total: ${{ total | number:'1.2-2' }}</div>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -311,6 +314,10 @@ var EditShoppingListComponent = /** @class */ (function () {
             _this.records = response.records;
             _this.calculateTotal();
         });
+    };
+    EditShoppingListComponent.prototype.onItemCompleted = function (record) {
+        console.log(record.completed);
+        console.log(record.id);
     };
     EditShoppingListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -496,7 +503,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\r\n    <span>Item Search</span>\r\n</mat-toolbar>\r\n  \r\n<mat-card>\r\n  <mat-form-field>\r\n    <input [(ngModel)]=\"productSearchTerm\" \r\n      name=\"txtProductSearchTerm\" \r\n      id=\"txtProductSearchTerm\" \r\n      #txtProductSearchTerm\r\n      (keyup.enter)=\"handleProductSearch()\" \r\n      matInput placeholder=\"Search for product\"\r\n    />\r\n  </mat-form-field>\r\n  <button  (click)=\"handleProductSearch()\" mat-raised-button color=\"primary\">Search</button>\r\n\r\n  <mat-list>\r\n    <mat-list-item *ngFor=\"let record of productItems\">\r\n        <h1 matLine>{{record.name}}</h1>\r\n        <p matLine>{{record.categoryPath}}</p>\r\n        <p matLine>${{record.salePrice}}</p>\r\n        <button  (click)=\"handleProductItemSelected(record)\" mat-raised-button color=\"primary\"> Select </button>\r\n      <mat-divider></mat-divider>\r\n    </mat-list-item>\r\n  </mat-list>\r\n</mat-card>\r\n\r\n\r\n"
+module.exports = "<mat-toolbar>\r\n    <span>Item Search</span>\r\n</mat-toolbar>\r\n  \r\n<mat-card>\r\n\r\n\r\n  <mat-form-field>\r\n    <input [(ngModel)]=\"productSearchTerm\" \r\n      name=\"txtProductSearchTerm\" \r\n      id=\"txtProductSearchTerm\" \r\n      #txtProductSearchTerm\r\n      (keyup.enter)=\"handleProductSearch()\" \r\n      matInput placeholder=\"Search for product\"\r\n    />\r\n  </mat-form-field>\r\n  <button  (click)=\"handleProductSearch()\" mat-raised-button color=\"primary\">Search</button> &nbsp;\r\n\r\n\r\n\r\n  <mat-list>\r\n    <mat-list-item *ngFor=\"let record of productItems\">\r\n        <h1 matLine>{{record.name}}</h1>\r\n        <p matLine>{{record.categoryPath}}</p>\r\n        <p matLine>${{record.salePrice}}</p>\r\n        <button  (click)=\"handleProductItemSelected(record)\" mat-raised-button color=\"primary\"> Select </button>\r\n      <mat-divider></mat-divider>\r\n    </mat-list-item>\r\n  </mat-list>\r\n</mat-card>\r\n\r\n\r\n<button routerLink=\"/edit-shopping-list/{{shoppingListId}}\" class=\"btn btn-primary\" mat-raised-button color=\"primary\"> Back To Shopping List </button>\r\n"
 
 /***/ }),
 
@@ -525,6 +532,7 @@ var ItemSearchComponent = /** @class */ (function () {
         this.route = route;
         this.shoppingListsService = shoppingListsService;
         this.router = router;
+        this.shoppingListId = this.route.snapshot.paramMap.get('id');
     }
     ItemSearchComponent.prototype.ngOnInit = function () {
         this.productItems = [];
@@ -543,7 +551,6 @@ var ItemSearchComponent = /** @class */ (function () {
     };
     ItemSearchComponent.prototype.handleProductItemSelected = function (record) {
         var _this = this;
-        this.shoppingListId = this.route.snapshot.paramMap.get('id');
         var request = new _shopping_lists_service__WEBPACK_IMPORTED_MODULE_3__["CreateShoppingListItemRequest"]();
         request.Completed = false;
         request.Price = record.salePrice;
@@ -773,7 +780,7 @@ var RegisterComponent = /** @class */ (function () {
 /*!*******************************************!*\
   !*** ./src/app/shopping-lists.service.ts ***!
   \*******************************************/
-/*! exports provided: BaseResponse, BasicRequest, ListShoppingListsResponse, ListShoppingListItemsRequest, ListShoppingListItemsResponse, WalmartProductSearchRequest, WalmartProductSearchResponse, DeleteShoppingListItemRequest, CreateShoppingListItemRequest, CreateShoppingListItemResponse, ShoppingListsService */
+/*! exports provided: BaseResponse, BasicRequest, ListShoppingListsResponse, ListShoppingListItemsRequest, ListShoppingListItemsResponse, WalmartProductSearchRequest, WalmartProductSearchResponse, DeleteShoppingListItemRequest, CreateShoppingListItemRequest, CreateShoppingListItemResponse, CreateShoppingListRequest, CreateShoppingListResponse, ArchiveShoppingListRequest, ShoppingListsService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -788,6 +795,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeleteShoppingListItemRequest", function() { return DeleteShoppingListItemRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateShoppingListItemRequest", function() { return CreateShoppingListItemRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateShoppingListItemResponse", function() { return CreateShoppingListItemResponse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateShoppingListRequest", function() { return CreateShoppingListRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateShoppingListResponse", function() { return CreateShoppingListResponse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArchiveShoppingListRequest", function() { return ArchiveShoppingListRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShoppingListsService", function() { return ShoppingListsService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
@@ -880,33 +890,63 @@ var CreateShoppingListItemResponse = /** @class */ (function (_super) {
     return CreateShoppingListItemResponse;
 }(Response));
 
+var CreateShoppingListRequest = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CreateShoppingListRequest, _super);
+    function CreateShoppingListRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return CreateShoppingListRequest;
+}(BasicRequest));
+
+var CreateShoppingListResponse = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CreateShoppingListResponse, _super);
+    function CreateShoppingListResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return CreateShoppingListResponse;
+}(Response));
+
+var ArchiveShoppingListRequest = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ArchiveShoppingListRequest, _super);
+    function ArchiveShoppingListRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return ArchiveShoppingListRequest;
+}(BasicRequest));
+
 var ShoppingListsService = /** @class */ (function () {
     function ShoppingListsService(http) {
         this.http = http;
     }
-    ShoppingListsService.prototype.getShoppingListsUrl = function () {
+    ShoppingListsService.prototype.ShoppingListsUrl = function () {
         return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/ListShoppingLists';
     };
     ShoppingListsService.prototype.deleteShoppingListItemUrl = function () {
         return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/DeleteShoppingListItem';
     };
-    ShoppingListsService.prototype.getShoppingListsItemsUrl = function () {
+    ShoppingListsService.prototype.ShoppingListsItemsUrl = function () {
         return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/ListShoppingListItems';
     };
-    ShoppingListsService.prototype.getWalmartProductSearchUrl = function () {
+    ShoppingListsService.prototype.WalmartProductSearchUrl = function () {
         return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/ListProductsForSearch';
     };
-    ShoppingListsService.prototype.getCreateShoppingListItemUrl = function () {
+    ShoppingListsService.prototype.CreateShoppingListItemUrl = function () {
         return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/CreateShoppingListItem';
     };
-    ShoppingListsService.prototype.getShoppingLists = function (request) {
+    ShoppingListsService.prototype.CreateShoppingListUrl = function () {
+        return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/CreateShoppingList';
+    };
+    ShoppingListsService.prototype.ArchiveShoppingListUrl = function () {
+        return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/ArchiveShoppingList';
+    };
+    ShoppingListsService.prototype.GetShoppingLists = function (request) {
         var _this = this;
-        return this.http.post(this.getShoppingListsUrl(), request, httpOptions)
+        return this.http.post(this.ShoppingListsUrl(), request, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('fetched shopping lists'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('getShoppingLists', null)));
     };
     ShoppingListsService.prototype.getShoppingListItems = function (request) {
         var _this = this;
-        return this.http.post(this.getShoppingListsItemsUrl(), request, httpOptions)
+        return this.http.post(this.ShoppingListsItemsUrl(), request, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('fetched shopping list items'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('getShoppingListItems', null)));
     };
     ShoppingListsService.prototype.deleteShoppingListItem = function (request) {
@@ -914,15 +954,25 @@ var ShoppingListsService = /** @class */ (function () {
         return this.http.post(this.deleteShoppingListItemUrl(), request, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('deleted shopping list item'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteShoppingListItem', null)));
     };
+    ShoppingListsService.prototype.archiveShoppingList = function (request) {
+        var _this = this;
+        return this.http.post(this.ArchiveShoppingListUrl(), request, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('archive shopping list'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('archiveShoppingListItem', null)));
+    };
     ShoppingListsService.prototype.walmartProductSearch = function (request) {
         var _this = this;
-        return this.http.post(this.getWalmartProductSearchUrl(), request, httpOptions)
+        return this.http.post(this.WalmartProductSearchUrl(), request, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('fetched shopping list items'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('walmartProductSearch', null)));
     };
     ShoppingListsService.prototype.createShoppingListItem = function (request) {
         var _this = this;
-        return this.http.post(this.getCreateShoppingListItemUrl(), request, httpOptions)
+        return this.http.post(this.CreateShoppingListItemUrl(), request, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('createShoppingListItem done'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('createShoppingListItem', null)));
+    };
+    ShoppingListsService.prototype.createShoppingList = function (request) {
+        var _this = this;
+        return this.http.post(this.CreateShoppingListUrl(), request, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('createShoppingList done'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('createShoppingList', null)));
     };
     ShoppingListsService.prototype.login = function (username, password) {
         return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + "/users/authenticate", { username: username, password: password })
@@ -999,7 +1049,7 @@ module.exports = ".align-right\r\n{\r\n    position: absolute;\r\n    right:0px;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\r\n    <span>Shopping Lists</span>\r\n</mat-toolbar>\r\n\r\n<mat-card>    \r\n    <mat-list>\r\n      <mat-list-item *ngFor=\"let record of records\">\r\n        <a routerLink=\"/edit-shopping-list/{{record.id}}\">\r\n          {{record.name}}\r\n        </a>\r\n        &nbsp;\r\n        <button \r\n          type=\"button\" \r\n          class=\"btn btn-danger align-right\" \r\n          mat-raised-button color=\"primary\" \r\n          >\r\n          Archive\r\n        </button>\r\n  \r\n      </mat-list-item>\r\n    </mat-list>\r\n</mat-card>      \r\n\r\n"
+module.exports = "<mat-toolbar>\r\n  <span>Shopping Lists</span>\r\n</mat-toolbar>\r\n\r\n\r\n<button type=\"button\" class=\"btn btn-danger\" mat-raised-button color=\"primary\" (click)=\"handleCreateList()\">\r\n  Create List\r\n</button>\r\n\r\n<mat-card>\r\n  <mat-list>\r\n    <mat-list-item *ngFor=\"let record of records\">\r\n      <a routerLink=\"/edit-shopping-list/{{record.id}}\">\r\n        {{record.name}}\r\n      </a>\r\n      &nbsp;\r\n      <button type=\"button\" class=\"btn btn-danger align-right\" mat-raised-button color=\"primary\" (click)=\"handleArchive(record.id)\">\r\n        Archive\r\n      </button>\r\n\r\n    </mat-list-item>\r\n  </mat-list>\r\n</mat-card>"
 
 /***/ }),
 
@@ -1030,11 +1080,32 @@ var ShoppingListsComponent = /** @class */ (function () {
         var _this = this;
         var request = new _shopping_lists_service__WEBPACK_IMPORTED_MODULE_2__["BasicRequest"]();
         request.userId = "fixme";
-        this.shoppingListService.getShoppingLists(request)
+        this.shoppingListService.GetShoppingLists(request)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])())
             .subscribe(function (response) {
             _this.records = response.records;
             console.log(_this.records);
+        });
+    };
+    ShoppingListsComponent.prototype.handleCreateList = function () {
+        var _this = this;
+        var request = new _shopping_lists_service__WEBPACK_IMPORTED_MODULE_2__["CreateShoppingListRequest"]();
+        request.Name = "List - " + new Date().toLocaleDateString();
+        this.shoppingListService.createShoppingList(request)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])())
+            .subscribe(function (response) {
+            _this.getList();
+        });
+    };
+    ShoppingListsComponent.prototype.handleArchive = function (recordId) {
+        var _this = this;
+        var request = new _shopping_lists_service__WEBPACK_IMPORTED_MODULE_2__["ArchiveShoppingListRequest"]();
+        console.log(recordId);
+        request.Id = recordId;
+        this.shoppingListService.archiveShoppingList(request)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])())
+            .subscribe(function (response) {
+            _this.getList();
         });
     };
     ShoppingListsComponent.prototype.ngOnInit = function () {
