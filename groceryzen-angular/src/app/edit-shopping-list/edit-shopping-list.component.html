@@ -4,7 +4,9 @@
 
 <mat-card>
   <button routerLink="/add-shopping-list-item/{{shoppingListId}}" class="btn btn-primary"
-    mat-raised-button color="primary"> Add </button>
+    mat-raised-button color="primary"> Add </button>&nbsp;
+  <button routerLink="/shopping-list" class="btn btn-primary"
+    mat-raised-button color="primary"> Back </button>
 
   <mat-list>
     <mat-list-item *ngFor="let record of records">
