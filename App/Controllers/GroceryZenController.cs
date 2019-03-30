@@ -77,5 +77,11 @@ namespace App.Controllers
             var response = await _mediator.Send(request);
             return Json(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CompleteShoppingListItem([FromBody] CompleteShoppingListItemRequest request) {
+            var response = await _mediator.Send(request);
+            return Json(response);
+        }
     }
 }

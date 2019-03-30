@@ -47,6 +47,10 @@ export class DeleteShoppingListItemRequest extends BasicRequest {
     id: string;
 }
 
+export class CompleteShoppingListItemRequest extends BasicRequest {
+  ShoppingListId: string;
+}
+
 export class CreateShoppingListItemRequest extends BasicRequest
 {
     ShoppingListId : string;
