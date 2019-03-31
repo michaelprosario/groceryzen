@@ -316,8 +316,12 @@ var EditShoppingListComponent = /** @class */ (function () {
         });
     };
     EditShoppingListComponent.prototype.onItemCompleted = function (record) {
-        console.log(record.completed);
-        console.log(record.id);
+        var request = new _shopping_lists_service__WEBPACK_IMPORTED_MODULE_2__["CompleteShoppingListItemRequest"]();
+        request.shoppingListItemId = record.id;
+        this.shoppingListsService.completeShoppingListItem(request)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])())
+            .subscribe(function (response) {
+        });
     };
     EditShoppingListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -780,7 +784,7 @@ var RegisterComponent = /** @class */ (function () {
 /*!*******************************************!*\
   !*** ./src/app/shopping-lists.service.ts ***!
   \*******************************************/
-/*! exports provided: BaseResponse, BasicRequest, ListShoppingListsResponse, ListShoppingListItemsRequest, ListShoppingListItemsResponse, WalmartProductSearchRequest, WalmartProductSearchResponse, DeleteShoppingListItemRequest, CreateShoppingListItemRequest, CreateShoppingListItemResponse, CreateShoppingListRequest, CreateShoppingListResponse, ArchiveShoppingListRequest, ShoppingListsService */
+/*! exports provided: BaseResponse, BasicRequest, ListShoppingListsResponse, ListShoppingListItemsRequest, ListShoppingListItemsResponse, WalmartProductSearchRequest, WalmartProductSearchResponse, DeleteShoppingListItemRequest, CompleteShoppingListItemRequest, CreateShoppingListItemRequest, CreateShoppingListItemResponse, CreateShoppingListRequest, CreateShoppingListResponse, ArchiveShoppingListRequest, ShoppingListsService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -793,6 +797,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WalmartProductSearchRequest", function() { return WalmartProductSearchRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WalmartProductSearchResponse", function() { return WalmartProductSearchResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeleteShoppingListItemRequest", function() { return DeleteShoppingListItemRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompleteShoppingListItemRequest", function() { return CompleteShoppingListItemRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateShoppingListItemRequest", function() { return CreateShoppingListItemRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateShoppingListItemResponse", function() { return CreateShoppingListItemResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateShoppingListRequest", function() { return CreateShoppingListRequest; });
@@ -874,6 +879,14 @@ var DeleteShoppingListItemRequest = /** @class */ (function (_super) {
     return DeleteShoppingListItemRequest;
 }(BasicRequest));
 
+var CompleteShoppingListItemRequest = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CompleteShoppingListItemRequest, _super);
+    function CompleteShoppingListItemRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return CompleteShoppingListItemRequest;
+}(BasicRequest));
+
 var CreateShoppingListItemRequest = /** @class */ (function (_super) {
     tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CreateShoppingListItemRequest, _super);
     function CreateShoppingListItemRequest() {
@@ -921,8 +934,11 @@ var ShoppingListsService = /** @class */ (function () {
     ShoppingListsService.prototype.ShoppingListsUrl = function () {
         return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/ListShoppingLists';
     };
-    ShoppingListsService.prototype.deleteShoppingListItemUrl = function () {
+    ShoppingListsService.prototype.DeleteShoppingListItemUrl = function () {
         return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/DeleteShoppingListItem';
+    };
+    ShoppingListsService.prototype.CompleteShoppingListItemUrl = function () {
+        return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/CompleteShoppingListItem';
     };
     ShoppingListsService.prototype.ShoppingListsItemsUrl = function () {
         return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/ListShoppingListItems';
@@ -939,7 +955,7 @@ var ShoppingListsService = /** @class */ (function () {
     ShoppingListsService.prototype.ArchiveShoppingListUrl = function () {
         return _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/GroceryZen/ArchiveShoppingList';
     };
-    ShoppingListsService.prototype.GetShoppingLists = function (request) {
+    ShoppingListsService.prototype.getShoppingLists = function (request) {
         var _this = this;
         return this.http.post(this.ShoppingListsUrl(), request, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('fetched shopping lists'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('getShoppingLists', null)));
@@ -951,8 +967,13 @@ var ShoppingListsService = /** @class */ (function () {
     };
     ShoppingListsService.prototype.deleteShoppingListItem = function (request) {
         var _this = this;
-        return this.http.post(this.deleteShoppingListItemUrl(), request, httpOptions)
+        return this.http.post(this.DeleteShoppingListItemUrl(), request, httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('deleted shopping list item'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteShoppingListItem', null)));
+    };
+    ShoppingListsService.prototype.completeShoppingListItem = function (request) {
+        var _this = this;
+        return this.http.post(this.CompleteShoppingListItemUrl(), request, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return _this.log('completed shopping list item'); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('completedShoppingListItem', null)));
     };
     ShoppingListsService.prototype.archiveShoppingList = function (request) {
         var _this = this;
@@ -1080,7 +1101,7 @@ var ShoppingListsComponent = /** @class */ (function () {
         var _this = this;
         var request = new _shopping_lists_service__WEBPACK_IMPORTED_MODULE_2__["BasicRequest"]();
         request.userId = "fixme";
-        this.shoppingListService.GetShoppingLists(request)
+        this.shoppingListService.getShoppingLists(request)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])())
             .subscribe(function (response) {
             _this.records = response.records;
