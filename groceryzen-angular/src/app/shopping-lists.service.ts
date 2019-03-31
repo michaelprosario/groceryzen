@@ -48,7 +48,7 @@ export class DeleteShoppingListItemRequest extends BasicRequest {
 }
 
 export class CompleteShoppingListItemRequest extends BasicRequest {
-  ShoppingListId: string;
+  shoppingListItemId: string;
 }
 
 export class CreateShoppingListItemRequest extends BasicRequest
@@ -95,8 +95,12 @@ export class ShoppingListsService {
     return environment.apiUrl + '/GroceryZen/ListShoppingLists';
   }
 
-  deleteShoppingListItemUrl(): string {
+  DeleteShoppingListItemUrl(): string {
     return environment.apiUrl + '/GroceryZen/DeleteShoppingListItem';
+  }  
+
+  CompleteShoppingListItemUrl(): string {
+    return environment.apiUrl + '/GroceryZen/CompleteShoppingListItem';
   }  
 
   ShoppingListsItemsUrl(): string {
@@ -119,7 +123,7 @@ export class ShoppingListsService {
     return environment.apiUrl + '/GroceryZen/ArchiveShoppingList';
   }    
 
-  GetShoppingLists (request: BasicRequest): Observable<ListShoppingListsResponse> {
+  getShoppingLists (request: BasicRequest): Observable<ListShoppingListsResponse> {
     return this.http.post<ListShoppingListsResponse>(this.ShoppingListsUrl(), request, httpOptions)
       .pipe(
         tap(_ => this.log('fetched shopping lists')),
@@ -136,12 +140,21 @@ export class ShoppingListsService {
   }  
 
   deleteShoppingListItem (request: DeleteShoppingListItemRequest): Observable<BaseResponse> {
-    return this.http.post<BaseResponse>(this.deleteShoppingListItemUrl(), request, httpOptions)
+    return this.http.post<BaseResponse>(this.DeleteShoppingListItemUrl(), request, httpOptions)
       .pipe(
         tap(_ => this.log('deleted shopping list item')),
         catchError(this.handleError('deleteShoppingListItem', null))
       );
   }  
+
+  completeShoppingListItem (request: CompleteShoppingListItemRequest): Observable<BaseResponse> {
+    return this.http.post<BaseResponse>(this.CompleteShoppingListItemUrl(), request, httpOptions)
+      .pipe(
+        tap(_ => this.log('completed shopping list item')),
+        catchError(this.handleError('completedShoppingListItem', null))
+      );
+  }  
+
 
   archiveShoppingList (request: ArchiveShoppingListRequest): Observable<BaseResponse> {
     return this.http.post<BaseResponse>(this.ArchiveShoppingListUrl(), request, httpOptions)

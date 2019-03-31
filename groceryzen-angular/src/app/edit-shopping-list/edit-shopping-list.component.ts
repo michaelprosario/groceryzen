@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingListsService, ListShoppingListItemsRequest, DeleteShoppingListItemRequest } from '../shopping-lists.service';
+import { ShoppingListsService, ListShoppingListItemsRequest, DeleteShoppingListItemRequest, CompleteShoppingListItemRequest } from '../shopping-lists.service';
 import { ActivatedRoute } from '@angular/router';
 import { ShoppingListItem } from '../entities/shopping-list-item';
 import { first } from 'rxjs/operators';
@@ -64,7 +64,14 @@ export class EditShoppingListComponent implements OnInit {
   }  
 
   onItemCompleted(record: ShoppingListItem): void {
-    console.log(record.completed);
-    console.log(record.id); 
+    let request = new CompleteShoppingListItemRequest();
+    request.shoppingListItemId = record.id;
+
+    this.shoppingListsService.completeShoppingListItem(request)
+    .pipe(first())
+    .subscribe(response => 
+    { 
+        
+    });
   }
 }

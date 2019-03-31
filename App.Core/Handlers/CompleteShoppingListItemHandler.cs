@@ -33,7 +33,7 @@ namespace App.Core.Handlers
                 return response;
             }
 
-            returnRecord.Completed = true;
+            returnRecord.Completed = !returnRecord.Completed;
 
             _repository.Update(returnRecord);
 

@@ -18,7 +18,7 @@ export class ShoppingListsComponent implements OnInit {
     let request = new BasicRequest();
     request.userId = "fixme";
 
-    this.shoppingListService.GetShoppingLists(request)
+    this.shoppingListService.getShoppingLists(request)
     .pipe(first())
     .subscribe(response => { 
       this.records = response.records; 
