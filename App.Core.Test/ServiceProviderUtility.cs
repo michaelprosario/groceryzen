@@ -23,7 +23,7 @@ namespace App.Core.Test
             var services = new ServiceCollection();
             
             // if you have handlers/events in other assemblies
-            services.AddMediatR(typeof(AddHandler).Assembly);
+            services.AddMediatR(typeof(ListShoppingListHandler).Assembly);
             services.AddDbContextPool<App.Infrastructure.GZContext>(
                 options =>
                      options.UseSqlite("Data Source=groceryzen.db", b => b.MigrationsAssembly("App"))

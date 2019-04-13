@@ -70,7 +70,6 @@ namespace App
             });
 
             // if you have handlers/events in other assemblies
-            services.AddMediatR(typeof(AddHandler).Assembly);
 
             services.AddDbContextPool<App.Infrastructure.GZContext>(
                 options =>

@@ -1,8 +1,7 @@
-
-using App.Core.Handlers;
-using Microsoft.Extensions.DependencyInjection;
 using System;
+using App.Core.Handlers;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Core.Test {
     public class Startup {
@@ -11,7 +10,6 @@ namespace App.Core.Test {
             services.AddMediatR ();
 
             // if you have handlers/events in other assemblies
-            services.AddMediatR(typeof(AddHandler).Assembly);            
         }
 
     }
