@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using App.Core.Handlers;
 using App.Core.Requests;
@@ -5,58 +6,35 @@ using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
-namespace App.Core.Test
-{
+namespace App.Core.Test {
     [TestClass]
-    public class HandlerTests
-    {
+    public class HandlerTests {
         IMediator _mediator;
 
         [TestInitialize]
-        public void Intialize()
-        {
-            var serviceProvider = new ServiceCollection()
-                    .AddMediatR(typeof(AddHandler).Assembly)
-                    .BuildServiceProvider();
+        public void Intialize () {
+            var serviceProvider = new ServiceCollection ()
+                .AddMediatR (typeof (AddHandler).Assembly)
+                .BuildServiceProvider ();
 
-            _mediator = serviceProvider.GetService<IMediator>();
-
-
+            _mediator = serviceProvider.GetService<IMediator> ();
         }
 
         [TestMethod]
-        public async Task AdderHandler__Add__HappyCase()
-        {
+        public async Task AdderHandler__Add__HappyCase () {
             // Arrange
-            AddRequest request = new AddRequest
-            {
+            AddRequest request = new AddRequest {
                 Number1 = 3,
                 Number2 = 2
             };
 
             // Act
-            AddResponse addResponse = await _mediator.Send(request);
+            AddResponse addResponse = await _mediator.Send (request);
 
             // Assert
-            Assert.IsTrue(addResponse != null, "response");
-            Assert.IsTrue(addResponse.Sum == 5, "sum defined");
-        }
-
-        [TestMethod]
-        public async Task WalmartProductSearchHandler__HappyCase()
-        {
-            // Arrange
-            WalmartProductSearchRequest request = new WalmartProductSearchRequest();
-            request.Query = "Crunch";
-
-            // Act
-            WalmartProductSearchResponse response = await _mediator.Send(request);
-
-            // Assert
-            Assert.IsTrue(response != null, "response");
-            Assert.IsTrue(response.Records.Count > 0, "we should have results");
+            Assert.IsTrue (addResponse != null, "response");
+            Assert.IsTrue (addResponse.Sum == 5, "sum defined");
         }
     }
 }
