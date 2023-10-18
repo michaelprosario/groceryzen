@@ -1,0 +1,11 @@
+12:13pm to 
+
+todo
+x- setup rabbitMQ
+- https://x-team.com/blog/set-up-rabbitmq-with-docker-compose/
+
+- send C# data table as panda JSON through rabbit mq
+x- receive JSON from python
+x- convert JSON to panda data frame
+x- process panda data frame
+- send rabbitmq to signal done

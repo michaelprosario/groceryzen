@@ -1,0 +1,62 @@
+﻿@model DocumentStore.Responses.GetDocumentResponse<DocStore.Core.Entities.Post>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/js/search.js"></script>
+<!--Main layout-->
+<div class="container">
+
+    <!--Section: Content-->
+    <section class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8" style="text-align:left;" id="divPostsArea">
+
+                    <h2>@Model.Document.Name</h2>
+                    <p>@Model.Document.CreatedAt by @Model.Document.CreatedBy</p>
+                    <br><br>
+                    <img src="/api/MediaFiles/v1/File/@Model.Document.FeaturedImage">
+
+                    @Html.Raw(Model.Document.HtmlContent)
+
+
+                </div>
+                <div class="col-md-4" style="vertical-align:top">
+                    <div class="input-group">
+                        <div class="form-outline">
+                            <input type="search" id="txtSearch" name="txtSearch" class="form-control"/>
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="handleSearch()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <br><br>
+                    <b>Recent Posts</b>
+                    <ul class="list-group list-group-flush text-start">
+                        @foreach (var post in ViewBag.Posts)
+                        {
+                            <li class="list-group-item">
+                                <a href="/content/post/@post.PermaLink">
+                                    @post.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!--Section: Content-->
+
+</div>
+
+<!--Main layout-->

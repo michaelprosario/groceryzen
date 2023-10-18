@@ -1,0 +1,85 @@
+﻿@model DocStore.Core.Responses.HomePageResponse
+@{
+    Layout = "_Layout";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/js/search.js"></script>
+
+<!--Main layout-->
+<div class="container">
+    <!--Section: Content-->
+    <section class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8" id="divPostsArea">
+                    <div class="container">
+
+                        @foreach (var post in Model.Posts)
+                        {
+                            <div class="row">
+                                <div class="col-md-4 text-start">
+                                    <img src="/api/MediaFiles/v1/File/thumbnail_@post.FeaturedImage">
+                                </div>
+                                <div class="col-md-1 text-start">
+                                </div>
+                                <div class="col-md-7 text-start">
+                                    <h4>
+                                        <a href="~/content/post/@post.PermaLink">@post.Name</a>
+                                    </h4>
+                                    <p>@post.CreatedAt by @post.CreatedBy</p>
+                                    <p>@post.Abstract</p>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        }
+
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <div class="form-outline">
+                            <input type="search" id="txtSearch" name="txtSearch" class="form-control"/>
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="handleSearch()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <br><br>
+                    <b>Recent Posts</b>
+                    <ul class="list-group list-group-flush text-start">
+                        @foreach (var post in Model.Posts)
+                        {
+                            <li class="list-group-item">
+                                <a href="/content/post/@post.PermaLink">
+                                    @post.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+
+                    <!-- 
+                    <br><br>
+                    <b>Categories</b>
+                    <ul class="list-group list-group-flush  text-start">
+                        @foreach (var category in Model.DropDownDataItems.Where(r => r.DropDown == "Category"))
+                        {
+                            <li class="list-group-item disabled">@category.Value</li>
+                        }
+                    </ul>
+                    -->
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!--Section: Content-->
+
+</div>
+
+<!--Main layout-->

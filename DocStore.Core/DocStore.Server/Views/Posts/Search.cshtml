@@ -1,0 +1,25 @@
+﻿@model DocumentStore.Responses.GetDocumentsResponse<DocStore.Core.Entities.Post>
+<div class="container">
+    @if(Model.Documents.Count == 0){
+        <h3>No posts found</h3>
+    }
+
+    @foreach(var post in Model.Documents)
+    {
+        <div class="row">
+            <div class="col-md-4 text-start">
+                <img src="/api/MediaFiles/v1/File/thumbnail_@post.FeaturedImage">
+            </div>
+            <div class="col-md-1 text-start">
+            </div>
+            <div class="col-md-7 text-start">
+                <h4>
+                    <a href="~/content/post/@post.PermaLink">@post.Name</a>
+                </h4>
+                <p>@post.CreatedAt by @post.CreatedBy</p>
+                <p>@post.Abstract</p>
+            </div>
+        </div>
+        <br><br>
+    }
+</div>

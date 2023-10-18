@@ -1,0 +1,42 @@
+version: "3"
+services: 
+    proxy:
+        build: 
+            context: ./Proxy
+            dockerfile: Dockerfile
+        networks:
+         - postgres
+        ports: 
+            - "80:80"
+            - "443:443"
+        restart: always
+        volumes:                
+            - ./certbot/www:/var/www/certbot/:ro    
+            - ./certbot/conf/:/etc/nginx/ssl/:ro  
+    client:
+        build:
+            context: ../ng-team-focus
+            dockerfile: Dockerfile
+        networks:
+         - postgres
+        ports: 
+            - "9000:80"
+    api:
+        build: 
+            context: ./
+            dockerfile: Dockerfile
+        networks:
+         - postgres
+        environment:
+            ConnectionString: "Server=postgres;Database=team-focus;Uid=team-focus;Pwd=team-focus"
+
+        ports: 
+            - "5000:80"
+    certbot:
+        image: certbot/certbot:latest
+        volumes:
+          - ./certbot/www/:/var/www/certbot/:rw
+          - ./certbot/conf/:/etc/letsencrypt/:rw
+networks:
+  postgres:
+    external: true

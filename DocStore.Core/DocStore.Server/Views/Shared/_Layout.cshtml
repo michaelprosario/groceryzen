@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Burrito Videos</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"/>
+    <!-- MDB -->
+    <link rel="stylesheet" href="~/css/mdb.min.css"/>
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="~/css/style.css"/>
+</head>
+<body>
+
+<!-- Intro settings -->
+<link rel="stylesheet" href="~/css/site.css">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top" style="border-bottom: solid silver;">
+    <div class="container-fluid">
+        <!-- Navbar brand -->
+        <h3>
+            <a href="/">Burrito Videos</a>
+        </h3>
+    </div>
+</nav>
+<!-- Navbar -->
+<br><br><br>
+
+<main class="my-5">
+    @RenderBody()
+</main>
+
+<!--Footer-->
+<footer class="bg-light text-lg-start">
+
+    <hr class="m-0"/>
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/">Go Burritos</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!--Footer-->
+<!-- MDB -->
+<script type="text/javascript" src="~/js/mdb.min.js"></script>
+<!-- Custom scripts -->
+<script type="text/javascript" src="~/js/script.js"></script>
+@RenderSection("Scripts", false)
+
+</body>
+</html>
